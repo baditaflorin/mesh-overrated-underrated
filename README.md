@@ -1,7 +1,7 @@
 # mesh-overrated-underrated
 
 [![pages](https://img.shields.io/badge/live-baditaflorin.github.io%2Fmesh-overrated-underrated-aaff00)](https://baditaflorin.github.io/mesh-overrated-underrated/)
-[![version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/baditaflorin/mesh-overrated-underrated/blob/main/package.json)
+[![version](https://img.shields.io/badge/version-0.1.1-blue)](https://github.com/baditaflorin/mesh-overrated-underrated/blob/main/package.json)
 [![license](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
 > Rotating topic; slide overrated ↔ correct ↔ underrated; see your gap from the room.
