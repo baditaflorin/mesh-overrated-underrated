@@ -89,14 +89,43 @@ body,
   font-weight: 600;
   cursor: pointer;
 }
+.our-help {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.6rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+.our-help strong {
+  color: var(--mesh-accent);
+  font-weight: 600;
+}
+.our-prompt {
+  margin: 0;
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
 .our-turn {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.6rem;
   padding: 0.6rem 0.8rem;
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.04);
   font-size: 0.9rem;
+}
+.our-current-next,
+.our-current-you {
+  opacity: 0.7;
+}
+.our-countdown {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
 }
 .our-turn.is-me {
   background: rgba(170, 255, 0, 0.12);
