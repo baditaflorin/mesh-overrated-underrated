@@ -4,7 +4,7 @@
 [![version](https://img.shields.io/badge/version-0.1.1-blue)](https://github.com/baditaflorin/mesh-overrated-underrated/blob/main/package.json)
 [![license](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
-> Rotating topic; slide overrated ↔ correct ↔ underrated; see your gap from the room.
+> Hot-take meter for the room: each peer takes a 30s turn naming a thing, everyone slides overrated ↔ correct ↔ underrated, and you see how far your take is from the live room average.
 
 **Live → https://baditaflorin.github.io/mesh-overrated-underrated/**
 
@@ -27,6 +27,14 @@
 A **rootless-computing** peer-to-peer browser app. No backend of its own beyond the self-hosted WebRTC stack listed below. State lives in a Yjs mesh shared by everyone in the same room.
 
 Read the principles → **https://baditaflorin.github.io/rootless-computing/principles.html**
+
+## Try it in 30 seconds
+
+1. Open the live URL in **two browser tabs** (both default to the same room).
+2. Type a name in each tab, then hit **start** in one.
+3. One tab is "dropping" — type a thing (a movie, a tool, a hot take) and **drop topic**.
+4. In both tabs, drag the slider from overrated → correct → underrated. The histogram and the room average update live, and the gap line shows how far your take is from the crowd.
+5. Wait for the 30s timer and the turn rotates to the next peer.
 
 ## Quickstart
 

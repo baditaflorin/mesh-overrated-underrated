@@ -106,6 +106,10 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
   const dropperName = turn.currentPeerId
     ? (nameOf(turn.currentPeerId) ?? `peer-${turn.currentPeerId.slice(0, 6)}`)
     : "—";
+  const nextName =
+    turn.nextPeerId && turn.nextPeerId !== turn.currentPeerId
+      ? (nameOf(turn.nextPeerId) ?? `peer-${turn.nextPeerId.slice(0, 6)}`)
+      : null;
   const gap = Math.round(myRating - avg);
   const sign = (n: number) => (n > 0 ? `+${n}` : `${n}`);
 
@@ -127,14 +131,26 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
       </header>
 
       {phase.phase === "lobby" && (
-        <button type="button" className="our-start" aria-label="start" onClick={start}>
-          start
-        </button>
+        <>
+          <p className="our-help">
+            Take turns naming a thing — a movie, a tool, a hot take. Each peer gets a 30-second turn
+            to drop one. Everyone else slides <strong>overrated ↔ correct ↔ underrated</strong>, and
+            the room average shows how far your take is from the crowd. Try it with two browser
+            tabs.
+          </p>
+          <button type="button" className="our-start" aria-label="start" onClick={start}>
+            start
+          </button>
+        </>
       )}
 
       {isVoting && (
         <div className={`our-turn ${turn.isMyTurn ? "is-me" : ""}`}>
-          <span className="our-current-name">dropping: {dropperName}</span>
+          <span className="our-turn-info">
+            <span className="our-current-name">dropping: {dropperName}</span>
+            {turn.isMyTurn && <span className="our-current-you"> (you)</span>}
+            {nextName && <span className="our-current-next"> · next: {nextName}</span>}
+          </span>
           <span className="our-countdown">{deadline.fmt}</span>
         </div>
       )}
@@ -157,6 +173,7 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
       {isVoting && currentTopic && (
         <>
           <div className={`our-current ${flash ? "is-flash" : ""}`}>{currentTopic.text}</div>
+          <p className="our-prompt">drag to place your take</p>
           <input
             className="our-slider"
             type="range"
@@ -187,7 +204,8 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
             })}
           </div>
           <div className="our-gap" data-gap={gap}>
-            you: {sign(Math.round(myRating))} · room: {sign(Math.round(avg))} (Δ{sign(gap)})
+            you: {sign(Math.round(myRating))} · room: {sign(Math.round(avg))} (Δ{sign(gap)}) ·{" "}
+            {peerRatings.length} vote{peerRatings.length === 1 ? "" : "s"}
           </div>
         </>
       )}

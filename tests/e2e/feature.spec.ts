@@ -57,6 +57,17 @@ test("topic + ratings sync; histogram bins update", async ({ browser, baseURL })
     //   A rates +80, room avg +20  ->  gap = +60.
     await expect(dropper.locator(".our-gap")).toHaveAttribute("data-gap", "60");
     await expect(dropper.locator(".our-gap")).toContainText("room: +20");
+
+    // The vote count is cross-peer too: both peers have now rated, so each
+    // screen must report "2 votes" — proving the average is computed over the
+    // synced ratings map, not just the local rating.
+    await expect(dropper.locator(".our-gap")).toContainText("2 votes");
+    await expect(other.locator(".our-gap")).toContainText("2 votes");
+
+    // Both peers also agree on the round-robin: each surfaces a shared "next:"
+    // peer in the turn banner (derived from the synced roster, not local state).
+    await expect(dropper.locator(".our-current-next")).toBeVisible();
+    await expect(other.locator(".our-current-next")).toBeVisible();
   } finally {
     await cleanup();
   }
