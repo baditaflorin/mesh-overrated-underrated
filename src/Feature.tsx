@@ -8,6 +8,7 @@ import {
   useFlashOnChange,
   useNamedPeer,
   usePhase,
+  useRoster,
   useRotatingTurn,
   type MeshConfig,
   type YRoom,
@@ -42,7 +43,8 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
   const clock = useMemo(() => createClockSync(room.provider), [room]);
   useEffect(() => () => clock.destroy(), [clock]);
 
-  useFairRng(room, "our-salts");
+  const roster = useRoster(room);
+  useFairRng(room, "our-salts", { peerIds: roster.present, minContributors: 1 });
   const phase = usePhase<"lobby" | "voting" | "done">(room, "phase", "lobby");
   const turn = useRotatingTurn(room, clock, { slotMs: SLOT_MS, order: "shuffle" });
   const topics = useEventLog<Topic>(room, "topics");
